@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Header from "./components/Header";
+import PseudoGenForm from "./components/PseudoGenForm"
+import "./styles/App.css"
+import UserNavForm from "./components/UserNavForm";
 
 function App() {
+  const [currentView, setCurrentView] = useState('tzi-labs');
+
+  let componentToRender;
+
+  switch (currentView) {
+    case 'PseudoRND Generator':
+      componentToRender = <PseudoGenForm setCurrentView={setCurrentView}/>;
+      break;
+    default:
+      componentToRender = <></>;
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header currentView={currentView}/>
+      <div className="container">
+      <UserNavForm currentView={currentView} setCurrentView={setCurrentView}/>
+      {componentToRender}
+      </div>
     </div>
   );
 }
