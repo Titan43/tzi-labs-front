@@ -94,6 +94,13 @@ form input, form select, form textarea, form button{
 	width: 100%;
 }
 
+.form-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
 .form-row input[type="radio"] {
     margin-right: 5px;
 }
@@ -101,6 +108,7 @@ form input, form select, form textarea, form button{
 .form-row label {
     display: inline-block;
     vertical-align: middle; 
+    margin-right: 10px;
 }
 
 .output-view {
@@ -160,5 +168,5 @@ button:hover {
 .active {
     background-color: #b0b0b0;
     color: #000;
-    pointer-events: none;
+    pointer-events: none;    
 }

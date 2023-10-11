@@ -13,7 +13,13 @@ function UserNavForm({currentView, setCurrentView}) {
           PseudoRND Generator
         </button>
         <button
-          className={currentView === "PLACEHOLDER" ? "active" : ""}
+          className={currentView === "Hash MD5" ? "active" : ""}
+          onClick={() => setCurrentView('Hash MD5')}
+        >
+          Hash MD5
+        </button>
+        <button
+          className={currentView === "tzi-labs" ? "active" : ""}
           onClick={() => setCurrentView('tzi-labs')}
         >
           TODO

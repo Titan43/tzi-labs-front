@@ -138,7 +138,7 @@ function PseudoGenForm({setCurrentView}) {
         <></>
         }
         <div>
-          <button onClick={() => null}>Go back</button>
+          <button onClick={() => setCurrentView('tzi-labs')}>Go back</button>
         </div>
       </form>
     </>
