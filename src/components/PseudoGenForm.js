@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PseudoGenOptions from "./PseudoGenOptions";
 
-function PseudoGenForm({setCurrentView}) {
+function PseudoGenForm({setCurrentView, handleMessage}) {
   const [option, setOption] = useState('');
   const [paramA, setParamA] = useState(0);
   const [paramM, setParamM] = useState(0);
