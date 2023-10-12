@@ -8,7 +8,6 @@ function PseudoGenForm({setCurrentView, handleMessage}) {
   const [paramC, setParamC] = useState(0);
   const [paramX0, setParamX0] = useState(0);
   const [size, setSize] = useState(1);
-  const [saveToFile, setSaveToFile] = useState(false);
 
   const handleOptionChange = (e) => {
     setOption(e.target.value);
@@ -37,10 +36,6 @@ function PseudoGenForm({setCurrentView, handleMessage}) {
     }
   };
 
-  const handleCheckboxChange = (e) => {
-    setSaveToFile(e.target.checked);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
@@ -48,7 +43,7 @@ function PseudoGenForm({setCurrentView, handleMessage}) {
 
   return (
     <>
-      <form className="page-form" id="data-form" onSubmit={handleSubmit}>
+      <form className="page-form form-container" id="data-form" onSubmit={handleSubmit}>
         <PseudoGenOptions option={option} handleOptionChange={handleOptionChange}/>
         {option !== '' ?
         <>
@@ -112,17 +107,6 @@ function PseudoGenForm({setCurrentView, handleMessage}) {
             max="100000"
             required
           />
-        </div>
-        <div className="form-row" id="saveToFileRow">
-          <label htmlFor="saveToFile">
-            <input
-              type="checkbox"
-              name="saveToFile"
-              checked={saveToFile}
-              onChange={handleCheckboxChange}
-            />
-            Save Output to File
-          </label>
         </div>
         </>
         :

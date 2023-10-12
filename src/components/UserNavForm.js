@@ -5,7 +5,7 @@ function UserNavForm({currentView, setCurrentView}) {
 
     return (
     <>
-      <form className="user-nav-form" onSubmit={handleSubmit}>
+      <form className="user-nav-form form-container" onSubmit={handleSubmit}>
         <button
           className={currentView === "PseudoRND Generator" ? "active" : ""}
           onClick={() => setCurrentView('PseudoRND Generator')}
