@@ -27,6 +27,7 @@ body {
 
 h3{
     margin-top: 15px;
+    color: #333;
 }
 
 .nav {
@@ -82,7 +83,7 @@ form {
 
 .form-container{
     margin: 1%;
-    flex: 1 ;
+    flex: 1;
     height: 80%;
     max-width: calc(50% - 10px);
     overflow: auto;
@@ -94,7 +95,7 @@ form label {
 	margin-top: 15px;
 }
 
-form input, form select, form textarea, form button{
+form input, form select, form textarea, form button, div button{
 	border: none;
 	border-radius: 5px;
 	font-size:1.2em;
@@ -140,17 +141,6 @@ form input, form select, form textarea, form button{
     margin-bottom: 10px;
 }
 
-#saveToFileRow input[type="checkbox"]{
-    width: auto;
-    float:right;
-    margin-left: 10px;
-    margin-right: 10px; 
-    margin-top: 2px;
-    border: none;
-    outline: none;
-    margin-bottom: 10px;
-}
-
 button {
     background-color: #3498db; 
     color: #fff;
@@ -177,4 +167,3 @@ button:hover {
     color: #000;
     pointer-events: none;    
 }
-

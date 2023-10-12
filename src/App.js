@@ -48,7 +48,8 @@ function App() {
       {componentToRender}
       {appOutput || loading? <OutputView 
         output={appOutput}
-        loading={loading}/>
+        loading={loading}
+        handleMessage={handleMessage}/>
         :
         <></>}
       </div>
