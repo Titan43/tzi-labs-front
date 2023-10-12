@@ -43,6 +43,7 @@ function App() {
       <UserNavForm 
         currentView={currentView} 
         setCurrentView={setCurrentView}
+        setAppOutput={setAppOutput}
         />
       {componentToRender}
       {appOutput || loading? <OutputView 

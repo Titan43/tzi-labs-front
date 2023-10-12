@@ -1,6 +1,7 @@
-function UserNavForm({currentView, setCurrentView}) {
+function UserNavForm({currentView, setCurrentView, setAppOutput}) {
     const handleSubmit = (event) => {
         event.preventDefault(); 
+        setAppOutput(null);
     };
 
     return (
