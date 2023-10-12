@@ -4,9 +4,12 @@ import PseudoGenForm from "./components/PseudoGenForm"
 import "./styles/App.css"
 import UserNavForm from "./components/UserNavForm";
 import Notification from "./components/Notification";
+import OutputView from "./components/OutputView";
 
 function App() {
   const [currentView, setCurrentView] = useState('tzi-labs');
+  const [appOutput, setAppOutput] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [type, setType] = useState('');
   const [notificationUpdateTime, setNotificationUpdateTime] = useState(Date.now());
@@ -17,13 +20,16 @@ function App() {
     setNotificationUpdateTime(Date.now());
   }
 
-  let componentToRender;
+  let componentToRender = null;
 
   switch (currentView) {
     case 'PseudoRND Generator':
       componentToRender = <PseudoGenForm 
         setCurrentView={setCurrentView}
         handleMessage={handleMessage}
+        loading={loading}
+        setLoading={setLoading}
+        setAppOutput={setAppOutput}
         />;
       break;
     default:
@@ -39,6 +45,11 @@ function App() {
         setCurrentView={setCurrentView}
         />
       {componentToRender}
+      {appOutput || loading? <OutputView 
+        output={appOutput}
+        loading={loading}/>
+        :
+        <></>}
       </div>
       <Notification 
         message={message} 

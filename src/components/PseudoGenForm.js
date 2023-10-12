@@ -1,10 +1,11 @@
 import { useState } from "react";
 import PseudoGenOptions from "./PseudoGenOptions";
+import getPseudoRNDOut from "./PseudoGenApi";
 
-function PseudoGenForm({setCurrentView, handleMessage}) {
+function PseudoGenForm({setCurrentView, handleMessage, loading, setLoading, setAppOutput}) {
   const [option, setOption] = useState('');
   const [paramA, setParamA] = useState(0);
-  const [paramM, setParamM] = useState(0);
+  const [paramM, setParamM] = useState(1);
   const [paramC, setParamC] = useState(0);
   const [paramX0, setParamX0] = useState(0);
   const [size, setSize] = useState(1);
@@ -38,7 +39,9 @@ function PseudoGenForm({setCurrentView, handleMessage}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
+    getPseudoRNDOut(paramA, paramM, paramC, paramX0,
+       size, option,
+        handleMessage, setLoading, setAppOutput);
   };
 
   return (
@@ -68,7 +71,7 @@ function PseudoGenForm({setCurrentView, handleMessage}) {
             name="paramM"
             value={paramM}
             onChange={handleInputChange}
-            min="0"
+            min="1"
             max="2147483647"
           />
         </div>
@@ -113,7 +116,7 @@ function PseudoGenForm({setCurrentView, handleMessage}) {
         <></>
         }
         <div className="form-row">
-          <button type="submit" id="submit-btn">
+          <button type="submit" className={loading ? "active" : ""} id="submit-btn">
             {option === 'generate' ? 'Generate sequence' : 'Get Function Period'}
           </button>
         </div>
