@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { compareFileHash, getMessageHash } from "./HashApi";
 
 function HashForm({setCurrentView, handleMessage, loading, setLoading, setAppOutput}) {
   const [option, setOption] = useState('');
@@ -7,6 +8,7 @@ function HashForm({setCurrentView, handleMessage, loading, setLoading, setAppOut
 
   const handleOptionChange = (e) => {
     setOption(e.target.value);
+    setMessage('');
   };
 
   const handleInputChange = (e) => {
@@ -25,6 +27,10 @@ function HashForm({setCurrentView, handleMessage, loading, setLoading, setAppOut
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(option === 'getHash')
+      getMessageHash(message, handleMessage, setLoading, setAppOutput);
+    else
+      compareFileHash(message, file, handleMessage, setLoading, setAppOutput);
   };
 
   return (
