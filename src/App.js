@@ -1,11 +1,11 @@
 import { useState } from "react";
 import Header from "./components/Header";
-import PseudoGenForm from "./components/PseudoGenForm"
+import PseudoGenForm from "./components/PseudoGen/PseudoGenForm"
 import "./styles/App.css"
 import UserNavForm from "./components/UserNavForm";
-import Notification from "./components/Notification";
-import OutputView from "./components/OutputView";
-import HashForm from "./components/HashForm";
+import Notification from "./components/Utils/Notification";
+import OutputView from "./components/Output/OutputView";
+import HashForm from "./components/Hash/HashForm";
 
 function App() {
   const [currentView, setCurrentView] = useState('tzi-labs');

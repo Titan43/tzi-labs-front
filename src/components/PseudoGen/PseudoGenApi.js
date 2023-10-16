@@ -1,4 +1,4 @@
-import { PSEUDO_GEN_PATH } from "./Constants";
+import { PSEUDO_GEN_PATH } from "../Utils/Constants";
 
 function getPseudoRNDOut(paramA, paramM, paramC, paramX0, size, option, handleMessage, setLoading, setAppOutput){
     setLoading(true);
