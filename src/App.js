@@ -5,6 +5,7 @@ import "./styles/App.css"
 import UserNavForm from "./components/UserNavForm";
 import Notification from "./components/Notification";
 import OutputView from "./components/OutputView";
+import HashForm from "./components/HashForm";
 
 function App() {
   const [currentView, setCurrentView] = useState('tzi-labs');
@@ -31,6 +32,15 @@ function App() {
         setLoading={setLoading}
         setAppOutput={setAppOutput}
         />;
+      break;
+    case 'Hash MD5':
+      componentToRender = <HashForm
+      setCurrentView={setCurrentView}
+      handleMessage={handleMessage}
+      loading={loading}
+      setLoading={setLoading}
+      setAppOutput={setAppOutput}
+      />
       break;
     default:
       componentToRender = <></>;
