@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { compareFileHash, getMessageHash } from "./HashApi";
+import Tooltip from "../Utils/Tooltip";
 
 function HashForm({setCurrentView, handleMessage, loading, setLoading, setAppOutput}) {
   const [option, setOption] = useState('');
@@ -48,7 +49,8 @@ function HashForm({setCurrentView, handleMessage, loading, setLoading, setAppOut
             checked={option === "getHash"}
             onChange={handleOptionChange}
           />
-           Get Hash</label>
+          <Tooltip text={"Get Hash value of a given message"}>Get Hash value</Tooltip>
+          </label>
         <label>
           <input
             type="radio"
@@ -57,7 +59,8 @@ function HashForm({setCurrentView, handleMessage, loading, setLoading, setAppOut
             checked={option === "compareHash"}
             onChange={handleOptionChange}
           />
-          Check file integrity using hash value</label>
+          <Tooltip text={"Check File integrity using it's last known Hash value"}>Check file integrity</Tooltip>
+          </label>
       </div>
       {option !== '' ?
         <>
@@ -65,7 +68,7 @@ function HashForm({setCurrentView, handleMessage, loading, setLoading, setAppOut
           <input
             type="text"
             name="message"
-            placeholder={option==='getHash' ? "Enter your message" : "Enter expected hash value"}
+            placeholder={option==='getHash' ? "Enter your message" : "Enter hash value"}
             value={message}
             onChange={handleInputChange}
           />
@@ -76,7 +79,9 @@ function HashForm({setCurrentView, handleMessage, loading, setLoading, setAppOut
 
           </div>
           <div className="form-row">
-            <label htmlFor="file">Upload a file:</label>
+            <label htmlFor="file">
+              <Tooltip text={"Upload a File to compare its Hash value"}>Upload a file:</Tooltip>
+            </label>
             <input type="file" name="file" id="file" onChange={handleInputChange}/>
           </div>
         </>

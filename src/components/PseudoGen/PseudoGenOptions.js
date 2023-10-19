@@ -1,3 +1,5 @@
+import Tooltip from "../Utils/Tooltip";
+
 function PseudoGenOptions({option, handleOptionChange}){
     return (<>
     <h3>Choose an option:</h3>
@@ -10,7 +12,9 @@ function PseudoGenOptions({option, handleOptionChange}){
               checked={option === 'generate'}
               onChange={handleOptionChange}
             />
-            Generate Sequence
+            <Tooltip text={"Generate a sequence of pseudorandom numbers using given params"}>
+              Generate Sequence
+            </Tooltip>
           </label>
           <label>
             <input
@@ -20,7 +24,9 @@ function PseudoGenOptions({option, handleOptionChange}){
               checked={option === 'period'}
               onChange={handleOptionChange}
             />
-            Function Period
+            <Tooltip text={"Find the period of a pseudorandom function with given params"}>
+              Function Period
+            </Tooltip>
           </label>
     </div>
     </>);
