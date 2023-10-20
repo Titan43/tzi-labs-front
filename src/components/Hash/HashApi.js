@@ -43,7 +43,7 @@ export function compareFileHash(message, file, handleMessage, setLoading, setApp
         if (response.ok) {
             response.text().then((out) => {
             handleMessage('File Hash was generated', 'success');
-            setAppOutput([message===out ? 'File is not corrupt, Hash values match' : 'File is corrupt, Hash values do not match'])
+            setAppOutput([message.toUpperCase()===out ? 'File is not corrupt, Hash values match' : 'File is corrupt, Hash values do not match'])
             });
         }
         else {
