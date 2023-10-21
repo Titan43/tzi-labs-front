@@ -21,7 +21,10 @@ function UserNavForm({currentView, setCurrentView, setAppOutput}) {
         </button>
         <button
           className={currentView === "tzi-labs" ? "active" : ""}
-          onClick={() => setCurrentView('tzi-labs')}
+          onClick={() => {
+            setCurrentView('tzi-labs');
+            setAppOutput(null);
+        }}
         >
           TODO
         </button>

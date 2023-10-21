@@ -1,4 +1,4 @@
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "../Utils/LoadingSpinner";
 import Result from "./Result";
 import SaveToFile from "./SaveToFile";
 

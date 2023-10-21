@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PseudoGenOptions from "./PseudoGenOptions";
 import getPseudoRNDOut from "./PseudoGenApi";
+import Tooltip from "../Utils/Tooltip";
 
 function PseudoGenForm({setCurrentView, handleMessage, loading, setLoading, setAppOutput}) {
   const [option, setOption] = useState('');
@@ -54,7 +55,9 @@ function PseudoGenForm({setCurrentView, handleMessage, loading, setLoading, setA
           <h3>Enter generator function params:</h3>
         </div>
         <div className="form-row">
-          <label htmlFor="paramA">A:</label>
+          <label htmlFor="paramA">
+            <Tooltip text={"Function multiplier"}>A:</Tooltip>
+          </label>
           <input
             type="number"
             name="paramA"
@@ -65,7 +68,9 @@ function PseudoGenForm({setCurrentView, handleMessage, loading, setLoading, setA
           />
         </div>
         <div className="form-row">
-          <label htmlFor="paramM">M:</label>
+          <label htmlFor="paramM">
+            <Tooltip text={"Comparison module"}>M:</Tooltip>
+          </label>
           <input
             type="number"
             name="paramM"
@@ -76,7 +81,9 @@ function PseudoGenForm({setCurrentView, handleMessage, loading, setLoading, setA
           />
         </div>
         <div className="form-row">
-          <label htmlFor="paramC">C:</label>
+          <label htmlFor="paramC">
+            <Tooltip text={"Function increment"}>C:</Tooltip>
+          </label>
           <input
             type="number"
             name="paramC"
@@ -87,7 +94,9 @@ function PseudoGenForm({setCurrentView, handleMessage, loading, setLoading, setA
           />
         </div>
         <div className="form-row">
-          <label htmlFor="paramX0">X0:</label>
+          <label htmlFor="paramX0">
+            <Tooltip text={"Initial value(seed) used for generating values"}>X0:</Tooltip>
+          </label>
           <input
             type="number"
             name="paramX0"
@@ -100,7 +109,9 @@ function PseudoGenForm({setCurrentView, handleMessage, loading, setLoading, setA
         {option==='generate'?
         <>
         <div className="form-row" id="size-row">
-          <label htmlFor="size">Sequence size:</label>
+          <label htmlFor="size">
+            <Tooltip text={"Size of the generated sequence(Initial value included)"}>Sequence size:</Tooltip>
+          </label>
           <input
             type="number"
             name="size"
