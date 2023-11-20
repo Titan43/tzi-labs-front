@@ -20,6 +20,12 @@ function UserNavForm({currentView, setCurrentView, setAppOutput}) {
           Hash MD5
         </button>
         <button
+          className={currentView === "Generate Keys" ? "active" : ""}
+          onClick={() => setCurrentView('Generate Keys')}
+        >
+          Generate Keys
+        </button>
+        <button
           className={currentView === "Encrypt data" ? "active" : ""}
           onClick={() => setCurrentView('Encrypt data')}
         >

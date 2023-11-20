@@ -197,7 +197,11 @@ function DecryptionForm({
                 {algorithm === "RC5" && (
                   <>
                     <div className="form-row">
-                      <label>RC5 Key:</label>
+                      <label>
+                      <Tooltip text={"Enter encryption key"}>
+                        RC5 Key:
+                      </Tooltip>
+                      </label>
                       <input
                         type="text"
                         name="rc5Key"
@@ -206,7 +210,11 @@ function DecryptionForm({
                       />
                     </div>
                     <div className="form-row">
-                      <label>RC5 IV:</label>
+                      <label>
+                      <Tooltip text={"Enter initialization vector"}>
+                        RC5 IV:
+                      </Tooltip>
+                      </label>
                       <input
                         type="number"
                         name="rc5IV"

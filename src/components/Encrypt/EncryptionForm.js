@@ -157,7 +157,9 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
                   <>
                     <div className="form-row">
                       <label>
+                      <Tooltip text={"Enter encryption key"}>
                         RC5 Key:
+                      </Tooltip>
                       </label>
                       <input
                         type="text"
@@ -168,7 +170,9 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
                     </div>
                     <div className="form-row">
                       <label>
+                      <Tooltip text={"Enter initialization vector"}>
                         RC5 IV:
+                      </Tooltip>
                       </label>
                       <input
                         type="number"
