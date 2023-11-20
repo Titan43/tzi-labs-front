@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Tooltip from "../Utils/Tooltip";
 import { encryptMessageRC5, encryptFileRC5 } from "./RC5Api";
+import { encryptFileRSA, encryptMessageRSA } from "./RSAApi";
 
 function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, setAppOutput }) {
   const [encryptionType, setEncryptionType] = useState('');
@@ -49,10 +50,24 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (encryptionType === "message" && algorithm === "RC5") {
-      encryptMessageRC5(message, rc5Key, rc5IV, handleMessage, setLoading, setAppOutput);
-    } else if (encryptionType === "file" && algorithm === "RC5") {
-      encryptFileRC5(file, rc5Key, rc5IV, handleMessage, setLoading, setAppOutput);
+  
+    if (encryptionType === "file" && file === null) {
+      handleMessage('Please upload a file for encryption.', 'error');
+      return;
+    }
+  
+    if (encryptionType === "message") {
+      if (algorithm === "RC5") {
+        encryptMessageRC5(message, rc5Key, rc5IV, handleMessage, setLoading, setAppOutput);
+      } else {
+        encryptMessageRSA(message, rsaKeyFile, handleMessage, setLoading, setAppOutput);
+      }
+    } else if (encryptionType === "file") {
+      if (algorithm === "RC5") {
+        encryptFileRC5(file, rc5Key, rc5IV, handleMessage, setLoading, setAppOutput);
+      } else {
+        encryptFileRSA(file, rsaKeyFile, handleMessage, setLoading, setAppOutput);
+      }
     }
   };
 
