@@ -26,6 +26,12 @@ function UserNavForm({currentView, setCurrentView, setAppOutput}) {
           Encrypt data
         </button>
         <button
+          className={currentView === "Decrypt data" ? "active" : ""}
+          onClick={() => setCurrentView('Decrypt data')}
+        >
+          Decrypt data
+        </button>
+        <button
           className={currentView === "tzi-labs" ? "active" : ""}
           onClick={() => {
             setCurrentView('tzi-labs');

@@ -1,24 +1,30 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Tooltip from "../Utils/Tooltip";
-import { encryptMessageRC5, encryptFileRC5 } from "./RC5Api";
-import { encryptFileRSA, encryptMessageRSA } from "./RSAApi";
+import { decryptMessageRC5, decryptFileRC5 } from "./RC5Api";
+import { decryptFileRSA, decryptMessageRSA } from "./RSAApi";
 
-function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, setAppOutput }) {
-  const [encryptionType, setEncryptionType] = useState('');
-  const [algorithm, setAlgorithm] = useState('');
-  const [message, setMessage] = useState('');
+function DecryptionForm({
+  setCurrentView,
+  handleMessage,
+  loading,
+  setLoading,
+  setAppOutput,
+}) {
+  const [encryptionType, setEncryptionType] = useState("");
+  const [algorithm, setAlgorithm] = useState("");
+  const [message, setMessage] = useState("");
   const [file, setFile] = useState(null);
-  const [rc5Key, setRC5Key] = useState('');
+  const [rc5Key, setRC5Key] = useState("");
   const [rsaKeyFile, setRSAKeyFile] = useState(null);
-  const [rc5IV, setRC5IV] = useState(''); 
+  const [rc5IV, setRC5IV] = useState("");
 
   const handleEncryptionTypeChange = (e) => {
     setEncryptionType(e.target.value);
-    setMessage('');
+    setMessage("");
     setFile(null);
-    setRC5Key('');
+    setRC5Key("");
     setRSAKeyFile(null);
-    setRC5IV(''); 
+    setRC5IV("");
   };
 
   const handleAlgorithmChange = (e) => {
@@ -50,30 +56,60 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     if (encryptionType === "file" && file === null) {
-      handleMessage('Please upload a file for encryption.', 'error');
+      handleMessage("Please upload a file for decryption.", "error");
       return;
     }
-  
+
     if (encryptionType === "message") {
       if (algorithm === "RC5") {
-        encryptMessageRC5(message, rc5Key, rc5IV, handleMessage, setLoading, setAppOutput);
+        decryptMessageRC5(
+          message,
+          rc5Key,
+          rc5IV,
+          handleMessage,
+          setLoading,
+          setAppOutput
+        );
       } else {
-        encryptMessageRSA(message, rsaKeyFile, handleMessage, setLoading, setAppOutput);
+        decryptMessageRSA(
+          message,
+          rsaKeyFile,
+          handleMessage,
+          setLoading,
+          setAppOutput
+        );
       }
     } else if (encryptionType === "file") {
       if (algorithm === "RC5") {
-        encryptFileRC5(file, rc5Key, rc5IV, handleMessage, setLoading, setAppOutput);
+        decryptFileRC5(
+          file,
+          rc5Key,
+          rc5IV,
+          handleMessage,
+          setLoading,
+          setAppOutput
+        );
       } else {
-        encryptFileRSA(file, rsaKeyFile, handleMessage, setLoading, setAppOutput);
+        decryptFileRSA(
+          file,
+          rsaKeyFile,
+          handleMessage,
+          setLoading,
+          setAppOutput
+        );
       }
     }
   };
 
   return (
     <>
-      <form className="page-form form-container" id="data-form" onSubmit={handleSubmit}>
+      <form
+        className="page-form form-container"
+        id="data-form"
+        onSubmit={handleSubmit}
+      >
         <div className="form-row">
           <h3>Choose an option:</h3>
         </div>
@@ -86,8 +122,8 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
               checked={encryptionType === "message"}
               onChange={handleEncryptionTypeChange}
             />
-            <Tooltip text={"Input a text message to encrypt"}>
-              Encrypt Message
+            <Tooltip text={"Input a text message to decrypt"}>
+              Decrypt Message
             </Tooltip>
           </label>
           <label>
@@ -98,12 +134,12 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
               checked={encryptionType === "file"}
               onChange={handleEncryptionTypeChange}
             />
-            <Tooltip text={"Upload a file to encrypt"}>
-              Encrypt File
+            <Tooltip text={"Upload a file to decrypt"}>
+              Decrypt File
             </Tooltip>
           </label>
         </div>
-        {encryptionType !== '' && (
+        {encryptionType !== "" && (
           <>
             <div className="form-row">
               <h3>Choose an algorithm:</h3>
@@ -130,7 +166,7 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
                 RSA
               </label>
             </div>
-            {algorithm !== '' && (
+            {algorithm !== "" && (
               <>
                 {encryptionType === "message" && (
                   <div className="form-row">
@@ -146,19 +182,22 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
                 {encryptionType === "file" && (
                   <div className="form-row">
                     <label htmlFor="file">
-                      <Tooltip text={"Upload a File to encrypt"}>
-                        Upload a file for Encryption:
+                      <Tooltip text={"Upload a File to decrypt"}>
+                        Upload a file for Decryption:
                       </Tooltip>
                     </label>
-                    <input type="file" name="file" id="file" onChange={handleInputChange} />
+                    <input
+                      type="file"
+                      name="file"
+                      id="file"
+                      onChange={handleInputChange}
+                    />
                   </div>
                 )}
                 {algorithm === "RC5" && (
                   <>
                     <div className="form-row">
-                      <label>
-                        RC5 Key:
-                      </label>
+                      <label>RC5 Key:</label>
                       <input
                         type="text"
                         name="rc5Key"
@@ -167,9 +206,7 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
                       />
                     </div>
                     <div className="form-row">
-                      <label>
-                        RC5 IV:
-                      </label>
+                      <label>RC5 IV:</label>
                       <input
                         type="number"
                         name="rc5IV"
@@ -177,14 +214,14 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
                         onChange={handleInputChange}
                         min={0}
                         max={Number.MAX_SAFE_INTEGER}
-                        />
+                      />
                     </div>
                   </>
                 )}
                 {algorithm === "RSA" && (
                   <div className="form-row">
                     <label>
-                      <Tooltip text={"Upload a PublicKey file"}>
+                      <Tooltip text={"Upload a PrivateKey file"}>
                         RSA Key File:
                       </Tooltip>
                     </label>
@@ -196,8 +233,14 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
                   </div>
                 )}
                 <div className="form-row">
-                  <button type="submit" className={loading ? "active" : ""} id="submit-btn">
-                    {encryptionType === "message" ? "Encrypt Message" : "Encrypt File"}
+                  <button
+                    type="submit"
+                    className={loading ? "active" : ""}
+                    id="submit-btn"
+                  >
+                    {encryptionType === "message"
+                      ? "Decrypt Message"
+                      : "Decrypt File"}
                   </button>
                 </div>
               </>
@@ -212,4 +255,4 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
   );
 }
 
-export default EncryptionForm;
+export default DecryptionForm;

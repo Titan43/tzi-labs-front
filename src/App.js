@@ -7,6 +7,7 @@ import Notification from "./components/Utils/Notification";
 import OutputView from "./components/Output/OutputView";
 import HashForm from "./components/Hash/HashForm";
 import EncryptionForm from "./components/Encrypt/EncryptionForm";
+import DecryptionForm from "./components/Decrypt/DecryptionForm";
 
 function App() {
   const [currentView, setCurrentView] = useState('tzi-labs');
@@ -52,6 +53,15 @@ function App() {
       setAppOutput={setAppOutput}
       />
       break;
+    case 'Decrypt data':
+        componentToRender = <DecryptionForm
+        setCurrentView={setCurrentView}
+        handleMessage={handleMessage}
+        loading={loading}
+        setLoading={setLoading}
+        setAppOutput={setAppOutput}
+        />
+        break;
     default:
       componentToRender = <></>;
   }
