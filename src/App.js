@@ -7,6 +7,8 @@ import Notification from "./components/Utils/Notification";
 import OutputView from "./components/Output/OutputView";
 import HashForm from "./components/Hash/HashForm";
 import EncryptionForm from "./components/Encrypt/EncryptionForm";
+import DecryptionForm from "./components/Decrypt/DecryptionForm";
+import KeyGeneratorForm from "./components/KeyGen/KeyGen";
 
 function App() {
   const [currentView, setCurrentView] = useState('tzi-labs');
@@ -43,6 +45,16 @@ function App() {
       setAppOutput={setAppOutput}
       />
       break;
+    case 'Generate Keys':
+      componentToRender = <KeyGeneratorForm
+      appOutput={appOutput}
+      setCurrentView={setCurrentView}
+      handleMessage={handleMessage}
+      loading={loading}
+      setLoading={setLoading}
+      setAppOutput={setAppOutput}
+      />
+      break;
     case 'Encrypt data':
       componentToRender = <EncryptionForm
       setCurrentView={setCurrentView}
@@ -52,6 +64,15 @@ function App() {
       setAppOutput={setAppOutput}
       />
       break;
+    case 'Decrypt data':
+        componentToRender = <DecryptionForm
+        setCurrentView={setCurrentView}
+        handleMessage={handleMessage}
+        loading={loading}
+        setLoading={setLoading}
+        setAppOutput={setAppOutput}
+        />
+        break;
     default:
       componentToRender = <></>;
   }
