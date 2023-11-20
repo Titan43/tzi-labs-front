@@ -20,6 +20,12 @@ function UserNavForm({currentView, setCurrentView, setAppOutput}) {
           Hash MD5
         </button>
         <button
+          className={currentView === "Encrypt data" ? "active" : ""}
+          onClick={() => setCurrentView('Encrypt data')}
+        >
+          Encrypt data
+        </button>
+        <button
           className={currentView === "tzi-labs" ? "active" : ""}
           onClick={() => {
             setCurrentView('tzi-labs');
