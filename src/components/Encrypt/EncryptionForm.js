@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Tooltip from "../Utils/Tooltip";
+import { encryptMessageRC5, encryptFileRC5 } from "./RC5Api";
 
 function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, setAppOutput }) {
   const [encryptionType, setEncryptionType] = useState('');
@@ -8,6 +9,7 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
   const [file, setFile] = useState(null);
   const [rc5Key, setRC5Key] = useState('');
   const [rsaKeyFile, setRSAKeyFile] = useState(null);
+  const [rc5IV, setRC5IV] = useState(''); 
 
   const handleEncryptionTypeChange = (e) => {
     setEncryptionType(e.target.value);
@@ -15,6 +17,7 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
     setFile(null);
     setRC5Key('');
     setRSAKeyFile(null);
+    setRC5IV(''); 
   };
 
   const handleAlgorithmChange = (e) => {
@@ -33,6 +36,9 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
       case "rc5Key":
         setRC5Key(value);
         break;
+      case "rc5IV":
+        setRC5IV(value);
+        break;
       case "rsaKeyFile":
         setRSAKeyFile(e.target.files[0]);
         break;
@@ -43,7 +49,11 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle your form submission logic here
+    if (encryptionType === "message" && algorithm === "RC5") {
+      encryptMessageRC5(message, rc5Key, rc5IV, handleMessage, setLoading, setAppOutput);
+    } else if (encryptionType === "file" && algorithm === "RC5") {
+      encryptFileRC5(file, rc5Key, rc5IV, handleMessage, setLoading, setAppOutput);
+    }
   };
 
   return (
@@ -62,7 +72,7 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
               onChange={handleEncryptionTypeChange}
             />
             <Tooltip text={"Input a text message to encrypt"}>
-            Encrypt Message
+              Encrypt Message
             </Tooltip>
           </label>
           <label>
@@ -74,7 +84,7 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
               onChange={handleEncryptionTypeChange}
             />
             <Tooltip text={"Upload a file to encrypt"}>
-            Encrypt File
+              Encrypt File
             </Tooltip>
           </label>
         </div>
@@ -129,24 +139,39 @@ function EncryptionForm({ setCurrentView, handleMessage, loading, setLoading, se
                   </div>
                 )}
                 {algorithm === "RC5" && (
-                  <div className="form-row">
-                    <label>
-                      RC5 Key:
-                    </label>
-                    <input
-                      type="text"
-                      name="rc5Key"
-                      value={rc5Key}
-                      onChange={handleInputChange}
-                    />
-                  </div>
+                  <>
+                    <div className="form-row">
+                      <label>
+                        RC5 Key:
+                      </label>
+                      <input
+                        type="text"
+                        name="rc5Key"
+                        value={rc5Key}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="form-row">
+                      <label>
+                        RC5 IV:
+                      </label>
+                      <input
+                        type="number"
+                        name="rc5IV"
+                        value={rc5IV}
+                        onChange={handleInputChange}
+                        min={0}
+                        max={Number.MAX_SAFE_INTEGER}
+                        />
+                    </div>
+                  </>
                 )}
                 {algorithm === "RSA" && (
                   <div className="form-row">
                     <label>
-                    <Tooltip text={"Upload a PrivateKey file"}>
-                      RSA Key File:
-                    </Tooltip>
+                      <Tooltip text={"Upload a PrivateKey file"}>
+                        RSA Key File:
+                      </Tooltip>
                     </label>
                     <input
                       type="file"
