@@ -10,7 +10,7 @@ function KeyGeneratorForm({ appOutput, setCurrentView, handleMessage, loading, s
   };
 
   const handleSaveKeys = () => {
-    const [privateKey, publicKey] = appOutput;
+    const [publicKey, privateKey] = appOutput;
 
     if (privateKey && publicKey) {
       saveKeyToFile(privateKey, "private_key.txt");

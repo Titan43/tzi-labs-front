@@ -9,6 +9,7 @@ import HashForm from "./components/Hash/HashForm";
 import EncryptionForm from "./components/Encrypt/EncryptionForm";
 import DecryptionForm from "./components/Decrypt/DecryptionForm";
 import KeyGeneratorForm from "./components/KeyGen/KeyGen";
+import SignForm from "./components/Sign/SignForm";
 
 function App() {
   const [currentView, setCurrentView] = useState('tzi-labs');
@@ -66,6 +67,15 @@ function App() {
       break;
     case 'Decrypt data':
         componentToRender = <DecryptionForm
+        setCurrentView={setCurrentView}
+        handleMessage={handleMessage}
+        loading={loading}
+        setLoading={setLoading}
+        setAppOutput={setAppOutput}
+        />
+        break;
+    case 'Sign data':
+        componentToRender = <SignForm
         setCurrentView={setCurrentView}
         handleMessage={handleMessage}
         loading={loading}

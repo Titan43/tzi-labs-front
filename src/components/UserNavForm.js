@@ -38,13 +38,10 @@ function UserNavForm({currentView, setCurrentView, setAppOutput}) {
           Decrypt data
         </button>
         <button
-          className={currentView === "tzi-labs" ? "active" : ""}
-          onClick={() => {
-            setCurrentView('tzi-labs');
-            setAppOutput(null);
-        }}
+          className={currentView === "Sign data" ? "active" : ""}
+          onClick={() => setCurrentView('Sign data')}
         >
-          TODO
+          Sign data
         </button>
       </form>
     </>
