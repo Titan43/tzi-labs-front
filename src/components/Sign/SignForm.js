@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Tooltip from "../Utils/Tooltip";
+import { signFile, signMessage, verifyMessage, verifyFile } from "./SignApi";
 
 function SignForm({
   setCurrentView,
@@ -55,42 +56,52 @@ function SignForm({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (operation === "verify" && dataType === "file" && file === null) {
-      handleMessage('Please upload a file for signature verification.', 'error');
-      return;
+    if(dataType === "file"){
+      if(!file){
+        handleMessage("Please provide a file", "error");
+        return;
+      }
+      else if(operation === "sign"){
+        if(!privateKeyFile){
+          handleMessage("Please provide a privateKey file for signature", "error");
+          return;
+        }
+        signFile(file, privateKeyFile, handleMessage, setLoading, setAppOutput);
+      }
+      else if(operation === "verify"){
+        if(!publicKeyFile){
+          handleMessage("Please provide a publicKey file for verification", "error");
+          return;
+        }
+        else if(!signature || signature.trim() === ""){
+          handleMessage("Please provide a propper signature", "error");
+          return;
+        }
+        verifyFile(file, signature, publicKeyFile, handleMessage, setLoading, setAppOutput);
+      }
+
+    }
+    else{
+      if(operation === "sign"){
+        if(!privateKeyFile){
+          handleMessage("Please provide a privateKey file for signature", "error");
+          return;
+        }
+        signMessage(message, privateKeyFile, handleMessage, setLoading, setAppOutput)
+      }
+      else if(operation === "verify"){
+        if(!publicKeyFile){
+          handleMessage("Please provide a publicKey file for verification", "error");
+          return;
+        }
+        else if(!signature || signature.trim() === ""){
+          handleMessage("Please provide a propper signature", "error");
+          return;
+        }
+        verifyMessage(message, signature, publicKeyFile, handleMessage, setLoading, setAppOutput);
+      }
     }
 
-    if (operation === "sign" && dataType === "file" && !privateKeyFile) {
-      handleMessage('Please upload a private key file for signature creation.', 'error');
-      return;
-    }
-
-    if (operation === "verify" && dataType === "file" && !publicKeyFile) {
-      handleMessage('Please upload a public key file for signature verification.', 'error');
-      return;
-    }
-
-    if (operation === "sign" && dataType === "message" && !privateKeyFile) {
-      handleMessage('Please upload a private key file for message signature creation.', 'error');
-      return;
-    }
-
-    if (operation === "verify" && dataType === "message" && !publicKeyFile) {
-      handleMessage('Please upload a public key file for message signature verification.', 'error');
-      return;
-    }
-
-    // Perform the sign or verify operation based on the selected options
-    // Add your logic here
-
-    // Example logic:
-    // if (operation === "sign") {
-    //   // Perform sign operation with privateKeyFile
-    //   // set the generated signature to state or display it as needed
-    // } else if (operation === "verify") {
-    //   // Perform verify operation with publicKeyFile and signature
-    //   // set the verification result to state or display it as needed
-    // }
   };
 
   return (

@@ -54,7 +54,6 @@ export async function encryptMessageRSA(message, publicKeyFile, handleMessage, s
   
       if (response.ok) {
         const out = await response.text();
-        console.log(out);
         handleMessage('File encrypted with RSA', 'success');
         setAppOutput([out]);
       } else {
